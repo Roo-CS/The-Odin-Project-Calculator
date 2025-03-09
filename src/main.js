@@ -20,13 +20,13 @@ function Divide(a, b){
 
 function Operate(operator, a, b){
   switch(operator){
-    case(operator == "+"):
+    case "+":
       return Add(a, b);
-    case(operator == "-"):
+    case "-":
       return Subtract(a, b);
-    case(operator == "*"):
+    case "*":
       return Multiply(a, b);
-    case(operator == "/"):
+    case "/":
       return Divide(a, b);
   }
 }
@@ -60,7 +60,11 @@ function changeDisplay(keyPress){
 
   switch(keyPress){
     case "AC":
-      displayElement.textContent = "";
+      displayElement.textContent = "0";
+      a = null;
+      b = null;
+      operator = null;
+      aCheck = false;
       break;
     case "+/-":
       var displayNum = +displayElement.textContent;
@@ -72,12 +76,38 @@ function changeDisplay(keyPress){
       displayNum /= 100;
       displayElement.textContent = String(displayNum);
       break;
-    //case "=":
-      
+    case "-":
+    case "+":
+    case "*":
+    case "/":
+      operator = keyPress;
+      a = +displayElement.textContent;
+      aCheck = true;
+      break;
+    case "=":
+      console.log(`${operator} ${a} ${+displayElement.textContent}`);
+      displayElement.textContent = Operate(operator, a, +displayElement.textContent);
+      operator = null;
+      a = +displayElement.textContent;
+      b = null;
+      aCheck = true;
+      break;
     default:
-      if (!isNaN(keyPress)) displayElement.textContent += keyPress;
+      if(!isNaN(keyPress)){
+        if(displayElement.textContent === '0' || aCheck){
+          displayElement.textContent = keyPress;
+          aCheck = false;
+        }else{
+          displayElement.textContent += keyPress;
+        }
+      }
       break;
   }
 }
+
+let operator = null;
+let a = null;
+let aCheck = false;
+let b = null;
 
 CreateButtons();
