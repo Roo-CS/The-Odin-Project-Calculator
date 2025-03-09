@@ -27,6 +27,7 @@
   height: 505px;
   width: 405px;
   border: black solid 2px;
+  overflow: hidden;
 }
 
 .button{

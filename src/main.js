@@ -78,19 +78,32 @@ function changeDisplay(keyPress){
       displayElement.textContent = String(displayNum);
       break;
     case ".":
-      if(!decimalFlag){
-        displayElement.textContent += "."
-        decimalFlag = true;
+      if(!decimalFlag) {
+          if (aCheck || displayElement.textContent === "0") {
+              displayElement.textContent = "0.";
+          } else {
+              displayElement.textContent += ".";
+          }
+          decimalFlag = true;
+          aCheck = false;
       }
       break;
     case "-":
     case "+":
     case "*":
     case "/":
-      operator = keyPress;
-      a = +displayElement.textContent;
-      aCheck = true;
-      break;
+      if (a === null) {
+        a = +displayElement.textContent;
+    } else if (b === null) {
+        b = +displayElement.textContent;
+        a = Operate(operator, a, b);
+        displayElement.textContent = a;
+    }
+    operator = keyPress;
+    aCheck = true;
+    b = null;
+    decimalFlag = false;
+    break;
     case "=":
       displayElement.textContent = Operate(operator, a, +displayElement.textContent);
       operator = null;
