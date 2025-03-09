@@ -10,6 +10,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: lightblue;
+  gap: 40px;
+}
+
+.page-wrapper .title{
+  font-size:40px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .calculator{
@@ -38,4 +45,5 @@
   justify-content: right;
   align-items: center;
   flex-wrap: wrap;
+  background-color: white;
 }

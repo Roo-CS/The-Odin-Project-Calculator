@@ -65,6 +65,7 @@ function changeDisplay(keyPress){
       b = null;
       operator = null;
       aCheck = false;
+      decimalFlag = false;
       break;
     case "+/-":
       var displayNum = +displayElement.textContent;
@@ -76,6 +77,12 @@ function changeDisplay(keyPress){
       displayNum /= 100;
       displayElement.textContent = String(displayNum);
       break;
+    case ".":
+      if(!decimalFlag){
+        displayElement.textContent += "."
+        decimalFlag = true;
+      }
+      break;
     case "-":
     case "+":
     case "*":
@@ -85,7 +92,6 @@ function changeDisplay(keyPress){
       aCheck = true;
       break;
     case "=":
-      console.log(`${operator} ${a} ${+displayElement.textContent}`);
       displayElement.textContent = Operate(operator, a, +displayElement.textContent);
       operator = null;
       a = +displayElement.textContent;
@@ -97,6 +103,7 @@ function changeDisplay(keyPress){
         if(displayElement.textContent === '0' || aCheck){
           displayElement.textContent = keyPress;
           aCheck = false;
+          decimalFlag = false;
         }else{
           displayElement.textContent += keyPress;
         }
@@ -109,5 +116,6 @@ let operator = null;
 let a = null;
 let aCheck = false;
 let b = null;
+let decimalFlag = false;
 
 CreateButtons();
